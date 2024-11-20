@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTry - Virtual Try-On Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar {
+            background-color: rgba(20, 20, 20, 0.9);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            color: white;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+        .nav-link {
+            color: #ffffff !important;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+        .nav-link:hover {
+            color: #ff4444 !important;
+        }
+        
+        .welcome-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+            padding: 0 20px;
+            background-size: cover;
+            background-position: center;
+            animation: changeBackground 20s infinite;
+        }
+
+        .welcome-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin-left: 10%;
+        }
+
+        @keyframes changeBackground {
+            0%, 20% {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(bg1.jpeg); 
+            }
+            25%, 45% {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(bg2.jpeg); 
+            }
+            50%, 70% {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(bg3.jpeg); 
+            }
+            75%, 95% {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(bg3.jpeg); 
+            }
+            100% {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(bg1.jpeg); 
+            }
+        }
+        .details_section {
+            background-color: rgba(30, 30, 30, 0.8);
+            padding: 50px 0;
+        }
+        .feature-section {
+            background-color: rgba(30, 30, 30, 0.8);
+            padding: 50px 0;
+        }
+        .card {
+            background-color: rgba(50, 50, 50, 0.9);
+            color: white;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-custom {
+            background-color: #ff4444;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #ff6666;
+            color: white;
+        }
+        .action {
+            background-color: #1a1a1a;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .modal-content {
+            background-color: #1a1a1a;
+            color: white;
+        }
+        .benefits-section {
+            padding: 40px 0;
+            background-color: rgba(25, 25, 25, 0.9);
+        }
+        .benefit-item {
+            text-align: center;
+            padding: 20px;
+        }
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: #ff4444;
+            margin-bottom: 15px;
+        }
+        .footer {
+            background-color: #111;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-left {
+            display: flex;
+            align-items: center;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .copyright {
+            color: #888;
+            font-size: 14px;
+        }
+        .payment-methods {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .payment-methods img {
+            height: 150px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .payment-methods img:hover {
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            .footer-left {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .payment-methods {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="VLogoNobg.png" alt="VTry Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#jump-to-it">Jump To It</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Welcome Section -->
+    <div id="home" class="welcome-section">
+        <div class="welcome-overlay"></div>
+        <div class="welcome-content">
+            <h1 class="display-3 mb-4">Welcome to VTry</h1>
+            <p class="lead mb-4">Experience the future of online shopping with our virtual try-on platform.</p>
+            <div class="d-flex gap-3">
+                <a href="#jump-to-it" class="btn btn-custom">Get Started</a>
+                <a href="#about" class="btn btn-outline-light">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detials Section -->
+    <div id="details" class="details_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Create Your Avatar</h5>
+                            <p class="card-text">Use advanced 3D modeling to create a personalized digital you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Virtual Try-On</h5>
+                            <p class="card-text">Experiment with different styles and fits before purchasing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">AI Recommendations</h5>
+                            <p class="card-text">Get personalized outfit suggestions tailored to your body type.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="benefits-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 benefit-item">
+                    <i class="fas fa-truck benefit-icon"></i>
+                    <h5>FREE DELIVERY</h5>
+                    <p>Free shipping on all order</p>
+                </div>
+                <div class="col-md-3 benefit-item">
+                    <i class="fas fa-headset benefit-icon"></i>
+                    <h5>ONLINE SUPPORT 24/7</h5>
+                    <p>Support online 24 hours a day</p>
+                </div>
+                <div class="col-md-3 benefit-item">
+                    <i class="fas fa-undo benefit-icon"></i>
+                    <h5>MONEY RETURN</h5>
+                    <p>Back guarantee under 7 days</p>
+                </div>
+                <div class="col-md-3 benefit-item">
+                    <i class="fas fa-gift benefit-icon"></i>
+                    <h5>MEMBER DISCOUNT</h5>
+                    <p>Get membership to unlock more exciting offers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Process Section -->
+    <div id="jump-to-it" class="action">
+        <div class="container">
+            <h2 class="mb-4">Ready to Transform Your Shopping Experience?</h2>
+            <p class="lead mb-4">Create your 3D avatar and start trying on clothes virtually today!</p>
+            <a href="tp2.html" class="btn btn-custom btn-lg">Start Virtual Try-On</a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="feature-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Create Your Avatar</h5>
+                            <p class="card-text">Use advanced 3D modeling to create a personalized digital you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Virtual Try-On</h5>
+                            <p class="card-text">Experiment with different styles and fits before purchasing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">AI Recommendations</h5>
+                            <p class="card-text">Get personalized outfit suggestions tailored to your body type.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="container py-5">
+        <h2 class="text-center mb-4">About VTry</h2>
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <p>VTry revolutionizes online shopping by providing a realistic, interactive way to try on clothes virtually. Our platform uses cutting-edge 3D modeling, AR, and AI technologies to create a seamless shopping experience.</p>
+                <p>The platform will utilize advanced 3D modeling, augmented reality (AR), and artificial intelligence (AI) technologies to create accurate representations of users' bodies and simulate the fit and appearance of various clothing items and accessories. Users will be able to mix and match different pieces, experiment with styles, and make informed purchasing decisions from the comfort of their homes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+<div id="contact" class="container py-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form id="contactForm">
+                <div class="mb-3">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" class="form-control bg-dark text-white" placeholder="Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" class="form-control bg-dark text-white" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message">Type your message:</label><br>
+                    <textarea id="message" class="form-control bg-dark text-white" rows="4" placeholder="Your Message" required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-custom">Send Message</button>
+                </div>
+            </form>
+            <div id="responseMessage" class="mt-3 text-center" style="display: none; color: #ff4444;">
+                Message Sent!
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // JavaScript to handle form submission
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Display the message
+        document.getElementById('responseMessage').style.display = 'block';
+
+        this.reset();
+    });
+</script>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <a href="#">
+                    <img src="VLogoNobg.png" alt="VTry Logo" height="40">
+                    </a>
+                </div>
+                <div class="copyright">
+                    © 2024 VTry. All rights reserved.
+                </div>
+            </div>
+            <div class="payment-methods">
+                <img src="payment (1).png" alt="payment">   
+            </div>
+        </div>
+    </div>
+</footer>
